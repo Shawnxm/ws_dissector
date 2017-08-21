@@ -246,14 +246,24 @@ proto_register_aww(void)
     };
 
     // subdissector table setup
+    // proto_table = register_dissector_table(
+    //                 "aww.proto",
+    //                 "AWW protocol",
+    //                 FT_UINT16,
+    //                 BASE_DEC
+    //                 );
     proto_table = register_dissector_table(
                     "aww.proto",
                     "AWW protocol",
+                    proto_aww,
                     FT_UINT16,
                     BASE_DEC
                     );
-
-    register_dissector("aww", dissect_aww, proto_aww);
+    const char *name;
+    dissector_t dissector;
+    const int proto=0;
+    register_dissector("aww",dissect_aww,proto);
+    //register_dissector("aww", dissect_aww, proto_aww);
     proto_register_field_array(proto_aww, hf, array_length(hf));
     proto_register_subtree_array(ett, array_length(ett));
 
