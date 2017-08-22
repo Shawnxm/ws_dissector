@@ -185,6 +185,7 @@ dissect_extra_pdcp_lte_info(tvbuff_t *tvb, packet_info *pinfo, gint32 offset)
 
 
 static void
+//static int
 dissect_aww(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree)
 {
     col_set_str(pinfo->cinfo, COL_PROTOCOL, "Automator Wireshark Wrapper");
@@ -216,6 +217,8 @@ dissect_aww(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree)
             }
         }
     }
+    
+    //return tvb_captured_length(tvb);
 }
 
 
@@ -259,11 +262,8 @@ proto_register_aww(void)
                     FT_UINT16,
                     BASE_DEC
                     );
-    const char *name;
-    dissector_t dissector;
-    const int proto=0;
-    register_dissector("aww",dissect_aww,proto);
     //register_dissector("aww", dissect_aww, proto_aww);
+    register_dissector("aww", dissect_aww, proto_aww);
     proto_register_field_array(proto_aww, hf, array_length(hf));
     proto_register_subtree_array(ett, array_length(ett));
 

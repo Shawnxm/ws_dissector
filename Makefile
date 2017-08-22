@@ -5,33 +5,147 @@
 
 LIB_PREFIX=/usr/local/lib
 WS_SRC_PATH=$(HOME)/wireshark-master
-GLIB_SRC=/usr/local/Cellar/glib/2.52.3
-LIBPCAP_SRC=/usr/local/Cellar/libpcap/1.8.1
 WS_LIB_PATH=$(HOME)/wireshark-master/build/lib
+WIRESHARK_SRC=$(HOME)/wireshark-master
+LIBPCAP_SRC=/usr/local/Cellar/libpcap/1.8.1
+GLIB_SRC=/usr/local/Cellar/glib/2.52.3
 IOS_PREFIX=$(HOME)/IOS
 IOS_LIB_PREFIX=$(HOME)/IOS
-ARCH=arm64-apple-darwin
-CROSS_PATH=${ios_PREFIX}/bin/${ARCH}
-CXX="$(xcrun --sdk iphoneos -f clang++)"
+ARCH=arm-apple-darwin
+CROSS_PATH=${IOS_PREFIX}/bin/${ARCH}
 STRIP=${CROSS_PATH}-strip
 IOS_CC_FLAGS=-I"$(WIRESHARK_SRC)" \
 				-I"$(LIBPCAP_SRC)" \
 				-I"$(GLIB_SRC)" \
-				-I"$(GLIB_SRC)/glib" \
-				
-				#-I"$(GLIB_SRC)/gmodule" \
-				-I"$(GLIB_SRC)/ios" \
-				-L"$(ios_LIB_PREFIX)" -lwireshark -lglib-2.0
+				-I"$(GLIB_SRC)/lib/glib-2.0/include" \
+				-I"$(GLIB_SRC)/include/glib-2.0" \
+				-L"$(IOS_LIB_PREFIX)" -lwireshark -lglib-2.0
+				#"$(xcrun --sdk iphoneos -f clang)"
+
+
+build_triplet = x86_64-apple-darwin16.7.0
+host_triplet = arm-apple-darwin
+target_triplet = arm-apple-darwin
+CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+CCDEPMODE = depmode=gcc3
+CC_FOR_BUILD = gcc
+CFLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk -arch arm64 -miphoneos-version-min=7.0
+CFLAGS_FOR_BUILD = -g -O2
+CFLAGS_SSE42 = 
+CONFIG_ARGS = --host=arm-apple-darwin --prefix=/Users/mssn/wireshark/build --enable-static --disable-shared --disable-wireshark --with-zlib=no --with-pcap=no
+COREFOUNDATION_FRAMEWORKS = -framework CoreFoundation
+CPP = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -E
+CPPFLAGS = 
+CPPFLAGS_FOR_BUILD = 
+CPP_FOR_BUILD = gcc -E
+CXX = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -std=c++11
+CXXCPP = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -E -std=c++11
+CXXDEPMODE = depmode=gcc3
+CXXFLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk -arch arm64 -miphoneos-version-min=7.0
+HAVE_BLESS = yes
+HAVE_CXX11 = 1
+HAVE_DOXYGEN = no
+HAVE_DPKG_BUILDPACKAGE = yes
+HAVE_HDIUTIL = yes
+HAVE_OSX_PACKAGING = yes
+HAVE_PKGMK = no
+HAVE_PKGPROTO = no
+HAVE_PKGTRANS = no
+HAVE_SHELLCHECK = no
+HAVE_SVR4_PACKAGING = no
+HAVE_XCODEBUILD = yes
+INSTALL = /usr/bin/install -c
+INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_PROGRAM = ${INSTALL}
+INSTALL_SCRIPT = ${INSTALL}
+INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
+LD = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld
+LDFLAGS = 
+LDFLAGS_BIGSHAREDLIB = 
+LDFLAGS_FOR_BUILD = 
+LDFLAGS_SHAREDLIB = -Wl,-single_module
+LEX = flex
+LEXLIB = 
+LEX_OUTPUT_ROOT = lex.yy
+LIBCAP_LIBS = 
+MKDIR_P = ./install-sh -c -d
+MOC = 
+MOC_OPTIONS = 
+NGHTTP2_LIBS = 
+NM = nm
+NMEDIT = nmedit
+NO_SANITIZE_CFLAGS = 
+NO_SANITIZE_LDFLAGS = 
+OBJDUMP = objdump
+OBJEXT = o
+OSX_APP_FLAGS = -sdkroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk
+OSX_DMG_FLAGS = 
+OSX_MIN_VERSION = 10.12
+PERL = /usr/local/bin/perl
+PIE_CFLAGS = 
+PIE_LDFLAGS = 
+PKG_CONFIG = /usr/local/bin/pkg-config
+PKG_CONFIG_LIBDIR = 
+PKG_CONFIG_PATH = 
+PLUGIN_LIBS = 
+POD2HTML = /usr/local/bin/pod2html
+POD2MAN = /usr/local/bin/pod2man
+PORTAUDIO_INCLUDES = 
+PORTAUDIO_LIBS = 
+PYTHON = /usr/local/bin/python
+SED = /usr/bin/sed
+SETCAP = 
+SET_MAKE = 
+SHELL = /bin/sh
+SNAPPY_LIBS = 
+SPANDSP_CFLAGS = 
+SPANDSP_LIBS = 
+SPEEXDSP_CFLAGS = 
+SPEEXDSP_LIBS = 
+SSL_LIBS = 
+STRIP = strip
+SYSTEMCONFIGURATION_FRAMEWORKS = -framework SystemConfiguration
+abs_builddir = /Users/mssn/ws_dissector
+abs_srcdir = /Users/mssn/ws_dissector
+abs_top_builddir = /Users/mssn/ws_dissector
+abs_top_srcdir = /Users/mssn/ws_dissector
+ac_ct_AR = ar
+ac_ct_CC = 
+ac_ct_CC_FOR_BUILD = gcc
+ac_ct_CXX = 
+ac_ct_DUMPBIN = link -dump
+am__include = include
+am__leading_dot = .
+am__quote = 
+am__tar = tar --format=ustar -chf - "$$tardir"
+am__untar = tar -xf -
+bindir = ${exec_prefix}/bin
+build = x86_64-apple-darwin16.7.0
+build_alias = 
+build_cpu = x86_64
+build_os = darwin16.7.0
+build_vendor = apple
+builddir = .
+host = arm-apple-darwin
+host_alias = arm-apple-darwin
+host_cpu = arm
+host_os = darwin
+host_vendor = apple
+target = arm-apple-darwin
+target_alias = 
+target_cpu = arm
+target_os = darwin
+target_vendor = apple
 
 
 all: ws_dissector
 
 .PHONY: IOS
 
-IOS: IOS_ws_dissector IOS_pie_ws_dissector
+IOS: ios_ws_dissector ios_pie_ws_dissector
 
 ws_dissector: ws_dissector.cpp packet-aww.cpp
-	/Applications/Xcode.app/Contents/Developer/usr/bin/g++ $^ -o $@ `pkg-config --libs --cflags glib-2.0` -I"$(WS_SRC_PATH)" \
+	g++ $^ -o $@ `pkg-config --libs --cflags glib-2.0` -I"$(WS_SRC_PATH)" \
 	-L"$(WS_LIB_PATH)" -lwireshark -lwsutil -lwiretap
 
 ios_ws_dissector: ws_dissector.cpp packet-aww.cpp
