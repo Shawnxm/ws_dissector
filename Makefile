@@ -4,9 +4,9 @@
 # Version : 1.0
 
 LIB_PREFIX=/usr/local/lib
-WS_SRC_PATH=$(HOME)/wireshark-master
-WS_LIB_PATH=$(HOME)/wireshark-master/build/lib
-WIRESHARK_SRC=$(HOME)/wireshark-master
+WS_SRC_PATH=$(HOME)/wireshark-2.4.0
+WS_LIB_PATH=$(HOME)/wireshark-2.4.0/build/lib
+WIRESHARK_SRC=$(HOME)/wireshark-2.4.0
 LIBPCAP_SRC=/usr/local/Cellar/libpcap/1.8.1
 GLIB_SRC=/usr/local/Cellar/glib/2.52.3
 IOS_PREFIX=$(HOME)/IOS
@@ -22,7 +22,6 @@ IOS_CC_FLAGS=-I"$(WIRESHARK_SRC)" \
 				-L"$(IOS_LIB_PREFIX)" -lwireshark -lglib-2.0
 				#"$(xcrun --sdk iphoneos -f clang)"
 
-
 build_triplet = x86_64-apple-darwin16.7.0
 host_triplet = arm-apple-darwin
 target_triplet = arm-apple-darwin
@@ -31,7 +30,6 @@ CCDEPMODE = depmode=gcc3
 CC_FOR_BUILD = gcc
 CFLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk -arch arm64 -miphoneos-version-min=7.0
 CFLAGS_FOR_BUILD = -g -O2
-CFLAGS_SSE42 = 
 CONFIG_ARGS = --host=arm-apple-darwin --prefix=/Users/mssn/wireshark/build --enable-static --disable-shared --disable-wireshark --with-zlib=no --with-pcap=no
 COREFOUNDATION_FRAMEWORKS = -framework CoreFoundation
 CPP = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -E
@@ -60,49 +58,25 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld
-LDFLAGS = 
-LDFLAGS_BIGSHAREDLIB = 
-LDFLAGS_FOR_BUILD = 
 LDFLAGS_SHAREDLIB = -Wl,-single_module
 LEX = flex
-LEXLIB = 
 LEX_OUTPUT_ROOT = lex.yy
-LIBCAP_LIBS = 
 MKDIR_P = ./install-sh -c -d
-MOC = 
-MOC_OPTIONS = 
-NGHTTP2_LIBS = 
 NM = nm
 NMEDIT = nmedit
-NO_SANITIZE_CFLAGS = 
-NO_SANITIZE_LDFLAGS = 
 OBJDUMP = objdump
 OBJEXT = o
 OSX_APP_FLAGS = -sdkroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk
-OSX_DMG_FLAGS = 
 OSX_MIN_VERSION = 10.12
-PERL = /usr/local/bin/perl
-PIE_CFLAGS = 
-PIE_LDFLAGS = 
+PERL = /usr/local/bin/perl 
 PKG_CONFIG = /usr/local/bin/pkg-config
-PKG_CONFIG_LIBDIR = 
-PKG_CONFIG_PATH = 
-PLUGIN_LIBS = 
 POD2HTML = /usr/local/bin/pod2html
 POD2MAN = /usr/local/bin/pod2man
 PORTAUDIO_INCLUDES = 
 PORTAUDIO_LIBS = 
 PYTHON = /usr/local/bin/python
 SED = /usr/bin/sed
-SETCAP = 
-SET_MAKE = 
 SHELL = /bin/sh
-SNAPPY_LIBS = 
-SPANDSP_CFLAGS = 
-SPANDSP_LIBS = 
-SPEEXDSP_CFLAGS = 
-SPEEXDSP_LIBS = 
-SSL_LIBS = 
 STRIP = strip
 SYSTEMCONFIGURATION_FRAMEWORKS = -framework SystemConfiguration
 abs_builddir = /Users/mssn/ws_dissector
@@ -110,18 +84,14 @@ abs_srcdir = /Users/mssn/ws_dissector
 abs_top_builddir = /Users/mssn/ws_dissector
 abs_top_srcdir = /Users/mssn/ws_dissector
 ac_ct_AR = ar
-ac_ct_CC = 
 ac_ct_CC_FOR_BUILD = gcc
-ac_ct_CXX = 
 ac_ct_DUMPBIN = link -dump
 am__include = include
 am__leading_dot = .
-am__quote = 
 am__tar = tar --format=ustar -chf - "$$tardir"
 am__untar = tar -xf -
 bindir = ${exec_prefix}/bin
 build = x86_64-apple-darwin16.7.0
-build_alias = 
 build_cpu = x86_64
 build_os = darwin16.7.0
 build_vendor = apple
