@@ -1,14 +1,16 @@
 # Makefile for ws_dissector PC and IOS version
 # Author  : Xumiao Zhang
-# Date    : 2017-08-18
+# Date    : 2017-08-23
 # Version : 1.0
 
 LIB_PREFIX=/usr/local/lib
 WS_SRC_PATH=$(HOME)/wireshark-2.4.0
 WS_LIB_PATH=$(HOME)/wireshark-2.4.0/build/lib
 WIRESHARK_SRC=$(HOME)/wireshark-2.4.0
-LIBPCAP_SRC=/usr/local/Cellar/libpcap/1.8.1
+#LIBPCAP_SRC=/usr/local/Cellar/libpcap/1.8.1
+LIBPCAP_SRC=/Users/mssn/compilation/libpcap-1.8.1
 GLIB_SRC=/usr/local/Cellar/glib/2.52.3
+
 IOS_PREFIX=$(HOME)/IOS
 IOS_LIB_PREFIX=$(HOME)/IOS
 ARCH=arm-apple-darwin
@@ -36,7 +38,7 @@ CPP = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolc
 CPPFLAGS = 
 CPPFLAGS_FOR_BUILD = 
 CPP_FOR_BUILD = gcc -E
-CXX = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -std=c++11
+CXX = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -isysroot $(xcrun --sdk iphoneos --show-sdk-path)
 CXXCPP = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -E -std=c++11
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk -arch arm64 -miphoneos-version-min=7.0
