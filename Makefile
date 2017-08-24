@@ -23,6 +23,7 @@ IOS_CC_FLAGS=-I"$(WIRESHARK_SRC)" \
 				-I"$(GLIB_SRC)/include/glib-2.0" \
 				-L"$(IOS_LIB_PREFIX)" -lwireshark -lglib-2.0
 				#"$(xcrun --sdk iphoneos -f clang)"
+DEFAULT_INCLUDES = -I.
 
 build_triplet = x86_64-apple-darwin16.7.0
 host_triplet = arm-apple-darwin
@@ -38,10 +39,12 @@ CPP = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolc
 CPPFLAGS = 
 CPPFLAGS_FOR_BUILD = 
 CPP_FOR_BUILD = gcc -E
-CXX = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -isysroot $(xcrun --sdk iphoneos --show-sdk-path)
+#CXX = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -isysroot $(xcrun --sdk iphoneos --show-sdk-path)
+CXX = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 CXXCPP = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -E -std=c++11
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk -arch arm64 -miphoneos-version-min=7.0
+
 HAVE_BLESS = yes
 HAVE_CXX11 = 1
 HAVE_DOXYGEN = no
@@ -121,7 +124,7 @@ ws_dissector: ws_dissector.cpp packet-aww.cpp
 	-L"$(WS_LIB_PATH)" -lwireshark -lwsutil -lwiretap
 
 ios_ws_dissector: ws_dissector.cpp packet-aww.cpp
-	$(CXX) -v $^ -o $@ $(IOS_CC_FLAGS)
+	$(CXX) $(CXXFLAGS) $(DEFAULT_INCLUDES) $^ -o $@ $(IOS_CC_FLAGS)
 
 ios_pie_ws_dissector: ws_dissector.cpp packet-aww.cpp
 	$(CXX) -v $^ -o $@ $(IOS_CC_FLAGS) -pie
