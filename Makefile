@@ -1,13 +1,13 @@
 # Makefile for ws_dissector PC and IOS version
 # Author  : Xumiao Zhang
-# Date    : 2017-08-23
+# Date    : 2017-08-24
 # Version : 1.0
 
 LIB_PREFIX=/usr/local/lib
 WS_SRC_PATH=$(HOME)/wireshark-2.4.0
 WS_LIB_PATH=$(HOME)/wireshark-2.4.0/build/lib
-WIRESHARK_SRC=$(HOME)/wireshark-2.4.0
-#LIBPCAP_SRC=/usr/local/Cellar/libpcap/1.8.1
+WIRESHARK_SRC=$(HOME)/wireshark-master
+# LIBPCAP_SRC=/usr/local/Cellar/libpcap/1.8.1
 LIBPCAP_SRC=/Users/mssn/compilation/libpcap-1.8.1
 GLIB_SRC=/usr/local/Cellar/glib/2.52.3
 
@@ -16,12 +16,12 @@ IOS_LIB_PREFIX=$(HOME)/IOS
 ARCH=arm-apple-darwin
 CROSS_PATH=${IOS_PREFIX}/bin/${ARCH}
 STRIP=${CROSS_PATH}-strip
-IOS_CC_FLAGS=-I"$(WIRESHARK_SRC)" \
+IOS_CC_FLAGS=   -I"$(WIRESHARK_SRC)" \
 				-I"$(LIBPCAP_SRC)" \
 				-I"$(GLIB_SRC)" \
 				-I"$(GLIB_SRC)/lib/glib-2.0/include" \
-				-I"$(GLIB_SRC)/include/glib-2.0" \
-				-L"$(IOS_LIB_PREFIX)" -lwireshark -lglib-2.0
+				-I"$(GLIB_SRC)/include/glib-2.0"
+IOS_CC_LIBS=	-L"$(IOS_LIB_PREFIX)" -lwireshark -lglib-2.0
 				#"$(xcrun --sdk iphoneos -f clang)"
 DEFAULT_INCLUDES = -I.
 
@@ -124,10 +124,10 @@ ws_dissector: ws_dissector.cpp packet-aww.cpp
 	-L"$(WS_LIB_PATH)" -lwireshark -lwsutil -lwiretap
 
 ios_ws_dissector: ws_dissector.cpp packet-aww.cpp
-	$(CXX) $(CXXFLAGS) $(DEFAULT_INCLUDES) $^ -o $@ $(IOS_CC_FLAGS)
+	$(CXX) $(CXXFLAGS) $(DEFAULT_INCLUDES) $^ -o $@ $(IOS_CC_FLAGS) $(IOS_CC_LIBS)
 
 ios_pie_ws_dissector: ws_dissector.cpp packet-aww.cpp
-	$(CXX) -v $^ -o $@ $(IOS_CC_FLAGS) -pie
+	$(CXX) -v $^ -o $@ $(IOS_CC_FLAGS) $(IOS_CC_LIBS) -pie
 
 strip:
 	$(STRIP) ios_ws_dissector ios_pie_ws_dissector
